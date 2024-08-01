@@ -5,7 +5,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/my-portfolio-website/'
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -19,12 +19,16 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(glb|gltf)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            outputPath: 'assets/models/'
+          }
+        }
       }
     ]
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    compress: true,
-    port: 9000
   }
 };
